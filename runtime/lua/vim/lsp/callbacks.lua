@@ -29,7 +29,7 @@ M['textDocument/publishDiagnostics'] = function(_, _, result)
     return
   end
   util.buf_clear_diagnostics(bufnr)
-  util.buf_diagnostics_save_positions(bufnr, result.diagnostics)
+  util.buf_diagnostics_save(bufnr, result.diagnostics)
   util.buf_diagnostics_underline(bufnr, result.diagnostics)
   util.buf_diagnostics_virtual_text(bufnr, result.diagnostics)
   -- util.set_loclist(result.diagnostics)
