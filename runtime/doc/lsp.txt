@@ -964,8 +964,10 @@ buf_diagnostics_save({bufnr}, {diagnostics})
                                    langauge server.
 
                                     *vim.lsp.util.buf_diagnostics_underline()*
-buf_diagnostics_underline({bufnr}, {diagnostics})
-                TODO: Documentation
+buf_diagnostics_underline({bufnr})
+                Looks up the diagnostics for {bufnr} in
+                |vim.lsp.buf.diagnostics_by_buf| and adds highlights for the
+		positions found.
 
                                  *vim.lsp.util.buf_diagnostics_virtual_text()*
 buf_diagnostics_virtual_text({bufnr})

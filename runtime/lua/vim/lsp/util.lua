@@ -707,24 +707,31 @@ do
     end
   end
 
-  function M.buf_diagnostics_underline(bufnr, diagnostics)
-    for _, diagnostic in ipairs(diagnostics) do
-      local start = diagnostic.range["start"]
-      local finish = diagnostic.range["end"]
 
-      local hlmap = {
-        [protocol.DiagnosticSeverity.Error]='Error',
-        [protocol.DiagnosticSeverity.Warning]='Warning',
-        [protocol.DiagnosticSeverity.Information]='Information',
-        [protocol.DiagnosticSeverity.Hint]='Hint',
-      }
+  function M.buf_diagnostics_underline(bufnr)
+    local buffer_diagnostics = M.diagnostics_by_buf[bufnr]
+    if not buffer_diagnostics then return end
 
-      -- TODO care about encoding here since this is in byte index?
-      highlight_range(bufnr, diagnostic_ns,
-        underline_highlight_name..hlmap[diagnostic.severity],
-        {start.line, start.character},
-        {finish.line, finish.character}
-      )
+    local hlmap = {
+      [protocol.DiagnosticSeverity.Error]='Error',
+      [protocol.DiagnosticSeverity.Warning]='Warning',
+      [protocol.DiagnosticSeverity.Information]='Information',
+      [protocol.DiagnosticSeverity.Hint]='Hint',
+    }
+    for _, line_diagnostics in pairs(buffer_diagnostics) do
+      for _, diagnostic in ipairs(line_diagnostics) do
+        local start = diagnostic.range["start"]
+        local finish = diagnostic.range["end"]
+
+        -- TODO care about encoding here since this is in byte index?
+        highlight_range(
+          bufnr,
+          diagnostic_ns,
+          underline_highlight_name .. hlmap[diagnostic.severity],
+          {start.line, start.character},
+          {finish.line, finish.character}
+        )
+      end
     end
   end
 
