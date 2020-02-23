@@ -968,8 +968,10 @@ buf_diagnostics_underline({bufnr}, {diagnostics})
                 TODO: Documentation
 
                                  *vim.lsp.util.buf_diagnostics_virtual_text()*
-buf_diagnostics_virtual_text({bufnr}, {diagnostics})
-                TODO: Documentation
+buf_diagnostics_virtual_text({bufnr})
+                Looks up the diagnostics for {bufnr} in
+                |vim.lsp.buf.diagnostics_by_buf| and displays them via virtual
+                text.
 
 character_offset({buf}, {row}, {col})        *vim.lsp.util.character_offset()*
                 TODO: Documentation
